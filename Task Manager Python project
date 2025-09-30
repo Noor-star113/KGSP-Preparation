@@ -1,0 +1,80 @@
+# Task Manager for KGSP Portfolio
+# Simple Python application demonstrating programming skills
+
+tasks = []
+
+def display_menu():
+    print("\n" + "="*50)
+    print("📝 TASK MANAGER - KGSP Portfolio Project")
+    print("="*50)
+    print("1. Add New Task")
+    print("2. View All Tasks") 
+    print("3. Mark Task as Completed")
+    print("4. Delete Task")
+    print("5. Exit")
+    print("="*50)
+
+def add_task():
+    task_name = input("Enter task name: ")
+    task = {"name": task_name, "completed": False}
+    tasks.append(task)
+    print(f"✅ Task '{task_name}' added successfully!")
+
+def view_tasks():
+    if not tasks:
+        print("📭 No tasks available.")
+        return
+    
+    print("\n📋 YOUR TASKS:")
+    for i, task in enumerate(tasks, 1):
+        status = "✅ COMPLETED" if task["completed"] else "🟨 PENDING"
+        print(f"{i}. {task['name']} - {status}")
+
+def mark_completed():
+    view_tasks()
+    if tasks:
+        try:
+            task_num = int(input("\nEnter task number to mark completed: ")) - 1
+            if 0 <= task_num < len(tasks):
+                tasks[task_num]["completed"] = True
+                print(f"🎉 Task marked as completed!")
+            else:
+                print("❌ Invalid task number")
+        except ValueError:
+            print("❌ Please enter a valid number")
+
+def delete_task():
+    view_tasks()
+    if tasks:
+        try:
+            task_num = int(input("\nEnter task number to delete: ")) - 1
+            if 0 <= task_num < len(tasks):
+                removed_task = tasks.pop(task_num)
+                print(f"🗑️ Task '{removed_task['name']}' deleted!")
+            else:
+                print("❌ Invalid task number")
+        except ValueError:
+            print("❌ Please enter a valid number")
+
+# Main Program
+print("🌟 Welcome to KGSP Task Manager!")
+print("This project demonstrates my Python programming skills")
+
+while True:
+    display_menu()
+    choice = input("\nChoose option (1-5): ")
+    
+    if choice == "1":
+        add_task()
+    elif choice == "2":
+        view_tasks()
+    elif choice == "3":
+        mark_completed()
+    elif choice == "4":
+        delete_task()
+    elif choice == "5":
+        print("\n🎓 Thank you for using Task Manager!")
+        print("Good luck with your KGSP application! 🚀")
+        break
+    else:
+        print("❌ Invalid choice, please try again")
